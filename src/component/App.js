@@ -21,10 +21,21 @@ class App extends Component {
         
     }
 
+    handleDelete = (idDel) => {
+        let currentItems = this.state.items.filter((element) => {
+            console.log(element.id, idDel)
+            return Math.round(element.id) !== Math.round(idDel)
+        });
+        console.log(currentItems);
+    }
+    
+
     render() {
         return (
             <div className="container">
-               {this.state.createUser ? <CreateForm createUser= { this.handleCreate }/> : <UserRedactor  data = {this.state.items} createUser= { this.handleCreate } /> }
+               {this.state.createUser 
+                ? <CreateForm createUser= { this.handleCreate }/> 
+                : <UserRedactor  userData = {this.state.items} createUser= { this.handleCreate } delete={ this.handleDelete} /> }
             </div>
         );
     }

@@ -6,31 +6,23 @@ export default class UserTable extends Component {
         this.state = {}
     }
 
-    // getBody = () => {
-    //     let {data} = this.props.data;
-    //     console.log(data);
-
-    //     return(
-    //         <tbody>
-    //             {data.map((element) => {
-    //                 return(
-    //                     <tr key = {element.id}>
-    //                         <td>{element.firstName}</td>
-    //                         <td>{element.lastName}</td>
-    //                         <td>{element.gender}</td>
-    //                         <td>{element.birthday}</td>
-    //                         <td><button>Edit</button></td>
-    //                         <td><button onClick= {this.handleClick}>Delete</button></td>
-    //                     </tr>
-    //                 );
-    //             })}
-    //         </tbody>
-    //     );
-    // }
-
     handleClick = (e) => {
-        this.props.delete("","", e.target.dataset.id);
-        console.log(e.target.dataset.id);
+        this.props.delete(e.target.dataset.id);
+    }
+
+    getBody = () =>  {
+        return this.props.dataUser.map((element) => {
+            return(
+                <tr key = {element.id}>
+                    <td>{element.firstName}</td>
+                    <td>{element.lastName}</td>
+                    <td>{element.gender}</td>
+                    <td>{element.birthday}</td>
+                    <td><button >Edit</button></td>
+                    <td><button data-id={ element.id } onClick = { this.handleClick }>Delete</button></td>
+                </tr>
+            );
+        })
     }
 
     render() {
@@ -47,18 +39,7 @@ export default class UserTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                {this.props.data.map((element) => {
-                    return(
-                        <tr key = {element.id}>
-                            <td>{element.firstName}</td>
-                            <td>{element.lastName}</td>
-                            <td>{element.gender}</td>
-                            <td>{element.birthday}</td>
-                            <td><button >Edit</button></td>
-                            <td><button data-id={ element.id } onClick = { this.handleClick }>Delete</button></td>
-                        </tr>
-                    );
-                })}
+                    {this.getBody()}
                 </tbody>
                
             </table>

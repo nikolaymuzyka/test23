@@ -13,26 +13,30 @@ export default class UserRedactor extends Component {
         }
     }
 
-    handleFilters = (fil, filVal, id) => {
+    handleFilters = (fil, filVal ) => {
         this.setState({
             filter: fil,
-            filterValue: filVal,
-            delId: id
+            filterValue: filVal
         });    
+    }
+
+    handleDelete = (id) => {
+        this.props.delete(id)
     }
 
     handleCreate = (val) => {
         this.props.createUser(val);
     }
 
+
+
     render() {
-        console.log(this.state);
-        let currentData = this.props.data;
-        console.log(currentData);
+       
+        let currentData = this.props.userData;
         let filtratedData = [];
         // if (this.state.filter) {
 
-        //     filtratedData = this.props.data.filter((element) => {
+        //     filtratedData = this.props.userData.filter((element) => {
         //         for (let key in element) {
         //             if (key === this.state.filter && key === 'gender' && element[key] === this.state.filterValue ) {
         //                 return true;
@@ -53,7 +57,7 @@ export default class UserRedactor extends Component {
                     <UserFilter filters = { this.handleFilters }  createNew = { this.handleCreate }/>
                 </div>
                 <div className="col-8">
-                    <UserTable data = { filtratedData } delete = { this.handleFilters }/>
+                    <UserTable dataUser = { filtratedData } delete = { this.handleDelete }/>
                 </div>
             </div>
         );
