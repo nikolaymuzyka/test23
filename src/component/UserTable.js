@@ -6,8 +6,12 @@ export default class UserTable extends Component {
         this.state = {}
     }
 
-    handleClick = (e) => {
+    handleDelete = (e) => {
         this.props.delete(e.target.dataset.id);
+    }
+
+    handleEdit = (e) => {
+        this.props.edit(e.target.dataset.id)
     }
 
     getBody = () =>  {
@@ -18,8 +22,8 @@ export default class UserTable extends Component {
                     <td>{element.lastName}</td>
                     <td>{element.gender}</td>
                     <td>{element.birthday}</td>
-                    <td><button >Edit</button></td>
-                    <td><button data-id={ element.id } onClick = { this.handleClick }>Delete</button></td>
+                    <td><button data-id={ element.id } onClick={ this.handleEdit }>Edit</button></td>
+                    <td><button data-id={ element.id } onClick = { this.handleDelete }>Delete</button></td>
                 </tr>
             );
         })

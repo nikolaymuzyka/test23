@@ -23,6 +23,9 @@ export default class UserRedactor extends Component {
     handleDelete = (id) => {
         this.props.delete(id)
     }
+    handleEdit = (id) => {
+        this.props.edit(id)
+    }
 
     handleCreate = (val) => {
         this.props.createUser(val);
@@ -57,7 +60,7 @@ export default class UserRedactor extends Component {
                     <UserFilter filters = { this.handleFilters }  createNew = { this.handleCreate }/>
                 </div>
                 <div className="col-8">
-                    <UserTable dataUser = { filtratedData } delete = { this.handleDelete }/>
+                    <UserTable dataUser = { filtratedData } delete = { this.handleDelete } edit= {this.handleEdit}/>
                 </div>
             </div>
         );

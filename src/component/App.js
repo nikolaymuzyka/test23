@@ -8,7 +8,8 @@ class App extends Component {
         super(props);
         this.state = {
            createUser: true,
-           items: []
+           items: [],
+           editItem: {}
         }
     }
     handleCreate = (val, obj) => {
@@ -26,7 +27,25 @@ class App extends Component {
             console.log(element.id, idDel)
             return Math.round(element.id) !== Math.round(idDel)
         });
-        console.log(currentItems);
+        this.setState({
+            items: currentItems
+        })
+    }
+
+    handleEdit = (idEdit) => {
+        let currentItem = this.state.items.filter((element) => {
+            console.log(element.id, idEdit)
+            return Math.round(element.id) === Math.round(idEdit)
+        });
+        
+        let cur = currentItem[0];
+        this.setState({        
+            editItem: cur
+        });
+        setTimeout(() => {console.log(this.state.editItem)}, 1000);
+        
+
+        
     }
     
 
@@ -35,7 +54,11 @@ class App extends Component {
             <div className="container">
                {this.state.createUser 
                 ? <CreateForm createUser= { this.handleCreate }/> 
-                : <UserRedactor  userData = {this.state.items} createUser= { this.handleCreate } delete={ this.handleDelete} /> }
+                : <UserRedactor  
+                    userData = {this.state.items} 
+                    createUser= { this.handleCreate } 
+                    delete={ this.handleDelete} 
+                    edit= { this.handleEdit }/> }
             </div>
         );
     }

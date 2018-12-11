@@ -4,7 +4,7 @@ class CreateForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: null,
+            id: "",
             firstName: '',
             lastName: '',
             gender: '',
@@ -26,10 +26,12 @@ class CreateForm extends Component {
     }
 
     componentDidMount = () => {
-        let cur = new Date();
-        this.setState({
-            id: cur.getTime()
-        });
+        if(!this.state.id){
+            let cur = new Date();
+            this.setState({
+                id: cur.getTime()
+            });
+        }
     }
 
     render() {
